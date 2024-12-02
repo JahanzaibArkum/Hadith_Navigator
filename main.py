@@ -11,12 +11,13 @@ import streamlit as st
 st.set_page_config(page_title="Hadith Chatbot", page_icon="🌟", layout="centered")
 
 # Set HuggingFace Hub API token
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
 
+HUGGINGFACE_TOKEN = st.secrets["huggingface"]["token"]
 # File paths
-CHROMA_DB_PATH = "/content/chroma_db"
-USER_DB_PATH = "/content/Book1.csv"
-CSV_PATH = '/content/sahih_bukhari_hadiths (1).csv'
+
+USER_DB_PATH = "Book1.csv"
+CSV_PATH = "sahih_bukhari_hadiths (1).csv"
+
 
 # Ensure user database exists
 if not os.path.exists(USER_DB_PATH):
@@ -49,7 +50,11 @@ vectorstore = load_vectorstore()
 @st.cache_resource
 def load_model():
     model_id = "google/flan-t5-base"
-    return HuggingFaceHub(repo_id=model_id, model_kwargs={"temperature": 0, "max_new_tokens": 200})
+    return HuggingFaceHub(
+        repo_id=model_id,
+        model_kwargs={"temperature": 0, "max_new_tokens": 200},
+        huggingfacehub_api_token=HUGGINGFACE_TOKEN
+    )
 
 llm = load_model()
 
