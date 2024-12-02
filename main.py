@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.vectorstores import Chroma
 from langchain.llms import HuggingFaceHub
 from langchain.schema import Document
 from langchain.chains import RetrievalQA
