@@ -1,3 +1,18 @@
+pip install huggingface_hub
+pip install langchain
+pip install sentence-transformers
+pip install chromadb
+pip install transformers torch accelerate bitsandbytes
+pip install -U langchain-huggingface
+pip install pandas
+pip install streamlit
+pip install scikit-learn
+pip install --upgrade langchain-huggingface langchain_community
+pip install --upgrade transformers
+pip uninstall -y langchain huggingface_hub sentence-transformers chromadb
+pip install langchain huggingface_hub sentence-transformers chromadb
+pip install -U langchain-community
+
 import os
 import pandas as pd
 from langchain.embeddings import HuggingFaceEmbeddings
@@ -14,7 +29,7 @@ st.set_page_config(page_title="Hadith Chatbot", page_icon="🌟", layout="center
 
 HUGGINGFACE_TOKEN = st.secrets["huggingface"]["token"]
 # File paths
-
+CHROMA = "chroma"
 USER_DB_PATH = "Book1.csv"
 CSV_PATH = "sahih_bukhari_hadiths (1).csv"
 
